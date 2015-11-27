@@ -1,0 +1,102 @@
+/* - General - */
+
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+
+    font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-weight: 300;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: #111111;
+    color: #CCCCCC;
+}
+
+a {
+    color: inherit;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.count {
+    font-family: "Inconsolata", monospace;
+}
+
+/* - Bar - */
+
+.bar {
+    width: 100%;
+    background-color: #222222;
+}
+
+    nav.bar {
+        border-bottom: 1px solid #333333;
+    }
+
+    footer.bar {
+        border-top: 1px solid #333333;
+    }
+
+    .bar ul {
+        overflow: auto;
+    }
+
+    .bar li {
+        display: inline-block;
+        padding: 10px 20px;
+    }
+
+    .bar a {
+        text-decoration: none;
+    }
+
+        .bar a:hover {
+            text-decoration: underline;
+        }
+
+/* - Main Layout - */
+
+.main-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+    .main p:first-of-type {
+        align-self: flex-start;
+    }
+
+    .main p:last-of-type {
+        align-self: flex-end;
+    }
+
+#current-stitch-count {
+    font-size: 15em;
+    text-align: center;
+}
