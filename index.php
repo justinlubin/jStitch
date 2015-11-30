@@ -5,9 +5,7 @@
         <meta charset="UTF-8" />
         <title>jStitch</title>
         <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700,Inconsolata' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="main.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="main.js"></script>
+        <link rel="stylesheet" href="css/main.css" />
     </head>
     <body class="main-layout">
         <nav class="bar">
