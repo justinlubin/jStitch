@@ -1,5 +1,4 @@
 /* - General - */
-
 * {
     margin: 0;
     padding: 0;
@@ -40,11 +39,68 @@ a {
     font-family: "Inconsolata", monospace;
 }
 
+/* - Popup Forms - */
+
+.popup-form {
+    display: none;
+    background-color: #222222;
+    padding: 20px;
+    border: 1px solid #333333;
+    box-shadow: 0 0 3px 0 #000000;
+    position: absolute;
+    right: 25%;
+    left: 25%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+    .popup-form h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #333333;
+    }
+
+    .popup-form label {
+        display: block;
+        font-size: 1.25em;
+    }
+
+    .popup-form input {
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .popup-form input[type="text"],
+    .popup-form input[type="password"],
+    .popup-form button {
+        display: block;
+        width: 100%;
+        background-color: #181818;
+        color: #CCCCCC;
+        font-size: 2em;
+        padding: 10px;
+        border: 1px solid #333333;
+        box-shadow: 0 0 3px 0 #000000 inset;
+        outline: none;
+    }
+
+    .popup-form button {
+        cursor: pointer;
+    }
+        .popup-form button:hover {
+            background-color: #1A1A1A;
+        }
+        .popup-form button:active {
+            background-color: #151515;
+        }
+
 /* - Bar - */
 
 .bar {
     width: 100%;
     background-color: #222222;
+    box-shadow: 0 0 3px 0 #000000 inset;
 }
 
     nav.bar {
@@ -53,6 +109,10 @@ a {
 
     footer.bar {
         border-top: 1px solid #333333;
+    }
+
+    .bar h1 {
+        font-size: 1em;
     }
 
     .bar ul {
@@ -74,25 +134,23 @@ a {
 
 /* - Main Layout - */
 
-.main-layout {
+#main-layout {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
 
-.main {
+#main {
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
-    .main p:first-of-type {
+    #main p:first-of-type {
         align-self: flex-start;
     }
-
-    .main p:last-of-type {
+    #main p:last-of-type {
         align-self: flex-end;
     }
 

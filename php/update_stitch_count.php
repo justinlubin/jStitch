@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $username = $_SESSION["username"];
         $delta_stitch = $_POST["delta_stitch"];
+        echo $username;
 
         update_current_stitch_count($connection, $username, $delta_stitch);
         update_total_stitch_count($connection, $username, $delta_stitch);

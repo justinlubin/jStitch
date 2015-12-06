@@ -1,5 +1,27 @@
 <?php
 
+function get_connection() {
+    $production = getenv("JSTITCH_PRODUCTION");
+    if ($production) {
+        $server = $_SERVER["SERVER_ADDR"];
+        $username = getenv("JSTITCH_USERNAME");
+        $password = getenv("JSTITCH_PASSWORD");
+        $db = getenv("JSTITCH_DB");
+    } else {
+        $server = "127.0.0.1";
+        $username = "root";
+        $password = "";
+        $db = "jstitch";
+    }
+    return new mysqli($server, $username, $password, $db);
+}
+
+function check_connection($connection) {
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
+}
+
 // Uses BCRYPT password hashing
 function add_user($connection, $username, $password) {
     $hash = password_hash($password, PASSWORD_BCRYPT);
