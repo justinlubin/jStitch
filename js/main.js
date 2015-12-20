@@ -10,7 +10,7 @@
         "-1": "An unknown error occurred.",
         "1": "You are not logged in!",
         "2": "You have entered invalid credentials.",
-        "3": "That username has already been taken.",
+        "3": "That username is already taken.",
         "4": "You must enter a username.",
         "5": "You must enter a password."
     }
