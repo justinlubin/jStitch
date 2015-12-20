@@ -15,7 +15,7 @@ define("ERROR_INVALID_PASSWORD", 5);
 function get_connection() {
     $production = getenv("JSTITCH_PRODUCTION");
     if ($production) {
-        $server = $_SERVER["SERVER_ADDR"];
+        $server = getenv("JSTITCH_HOST");
         $username = getenv("JSTITCH_USERNAME");
         $password = getenv("JSTITCH_PASSWORD");
         $db = getenv("JSTITCH_DB");
