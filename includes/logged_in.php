@@ -13,7 +13,7 @@
     </div>
     <footer class="bar">
         <ul>
-            <li><a href="#">Clear Current Stitch Count</a></li>
+            <li><a href="#" id="clear-current">Clear Current Stitch Count</a></li>
             <li>Total Stitch Count: <span id="total-stitch-count" class="count">0</span></li>
         </ul>
     </footer>

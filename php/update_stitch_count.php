@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $delta_stitch = $_POST["delta_stitch"];
 
         $errorCode1 = update_current_stitch_count($connection, $username, $delta_stitch);
-        if ($erroCode1 == SUCCESS) {
+        if ($errorCode1 == SUCCESS) {
             $errorCode2 = update_total_stitch_count($connection,
                                                     $username,
                                                     $delta_stitch);

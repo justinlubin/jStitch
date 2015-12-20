@@ -23,8 +23,8 @@
         alert(message);
     }
 
-    function clearStitchCount() {
-        $.post("php/clear_stitch_count.php", function(errorCode) {
+    function clearCurrentStitchCount() {
+        $.post("php/clear_current_stitch_count.php", function(errorCode) {
             errorCode = parseInt(errorCode);
             if (errorCode !== 0) {
                 showError(errorCode);
@@ -111,8 +111,13 @@
                 }
             });
             $("#log-out").click(function() {
+                event.preventDefault();
                 logOut();
             })
+            $("#clear-current").click(function() {
+                event.preventDefault();
+                clearCurrentStitchCount();
+            });
         } else {
             $("#register-submit").click(function() {
                 var username = $("#register-username").val();

@@ -75,7 +75,7 @@ function log_in_user($connection, $username, $password) {
     }
 }
 
-function log_out_user($connection) {
+function log_out_user() {
     unset($_SESSION["username"]);
 }
 
@@ -102,8 +102,8 @@ function update_current_stitch_count($connection, $username, $deltaStitch) {
 function update_total_stitch_count($connection, $username, $deltaStitch) {
     $sql = "UPDATE tb_user
             SET total_stitch_count =
-                IF (total_stitch_count + $deltaStitch < 0,
-                    0,
+                IF (current_stitch_count + $deltaStitch < 0,
+                    total_stitch_count,
                     total_stitch_count + $deltaStitch
                 )
             WHERE BINARY pk_username = '$username'";
