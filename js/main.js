@@ -103,13 +103,23 @@
         var loggedIn = $(document.body).data("logged-in");
         if (loggedIn === 1) {
             updateLocalStitchCounts();
+
+            var keysDown = {};
             $(document).keydown(function(event) {
+                if (keysDown[event.which] === true) {
+                    return;
+                }
+                keysDown[event.which] = true;
                 if (event.which === UP_ARROW_KEY || event.which === SPACE_BAR_KEY) {
                     updateStitchCount(1);
                 } else if (event.which === DOWN_ARROW_KEY) {
                     updateStitchCount(-1);
                 }
             });
+            $(document).keyup(function(event) {
+                keysDown[event.which] = null;
+            });
+
             $("#log-out").click(function() {
                 event.preventDefault();
                 logOut();
