@@ -1,5 +1,3 @@
-CREATE DATABASE IF NOT EXISTS jstitch;
-USE jstitch;
 CREATE TABLE IF NOT EXISTS tb_user (
     pk_username VARCHAR(255) NOT NULL,
     hash BINARY(60) NOT NULL,
