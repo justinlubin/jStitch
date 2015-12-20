@@ -1,6 +1,8 @@
 <?php
 
-// Returns an error code.
+// Returns [errorCode, currentStitchCount, totalStitchCount]. If errorCode is
+// not 0, then the values of currentStitchCount and totalStitchCount are
+// undefined behavior.
 
 require_once("api.php");
 
@@ -11,11 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $username = $_SESSION["username"];
 
-        echo clear_current_stitch_count($connection, $username);
+        echo json_encode(get_stitch_counts($connection, $username));
 
         $connection->close();
     } else {
-        echo ERROR_NOT_LOGGED_IN;
+        echo json_encode([ERROR_NOT_LOGGED_IN, -1, -1]);
     }
 } else {
     goto_page("");

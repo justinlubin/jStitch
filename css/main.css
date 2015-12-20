@@ -11,11 +11,12 @@
     box-sizing: border-box;
 
     font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    font-weight: 300;
 }
 
 html, body {
     height: 100%;
+    font-weight: 300;
+    overflow: hidden;
 }
 
 body {
@@ -24,7 +25,7 @@ body {
 }
 
 a {
-    color: inherit;
+    color: #FFB1B1;
 }
 
 .left {
@@ -39,41 +40,53 @@ a {
     font-family: "Inconsolata", monospace;
 }
 
-/* - Popup Forms - */
+/* - Front Title - */
 
-.popup-form {
-    display: none;
-    background-color: #222222;
-    padding: 20px;
-    border: 1px solid #333333;
-    box-shadow: 0 0 3px 0 #000000;
-    position: absolute;
-    right: 25%;
-    left: 25%;
-    top: 50%;
-    transform: translateY(-50%);
+#front-title {
+    color: #FFB1B1;
+    font-size: 7em;
+    font-weight: 300;
+    text-align: center;
+    margin: 50px;
 }
 
-    .popup-form h2 {
+/* - Register / Login Forms - */
+
+#form-holder {
+    display: flex;
+    justify-content: center;
+}
+
+.form {
+    background-color: #222222;
+    border: 1px solid #333333;
+    box-shadow: 0 0 3px 0 #000000;
+    width: 450px;
+    margin: 0 20px;
+    padding: 20px;
+}
+
+    .form h2 {
         font-size: 2em;
+        font-weight: 300;
         margin-bottom: 20px;
         padding-bottom: 20px;
         border-bottom: 1px solid #333333;
     }
 
-    .popup-form label {
+    .form label {
         display: block;
         font-size: 1.25em;
     }
 
-    .popup-form input {
+    .form input {
         display: block;
         margin-bottom: 20px;
     }
 
-    .popup-form input[type="text"],
-    .popup-form input[type="password"],
-    .popup-form button {
+    .form input[type="text"],
+    .form input[type="password"],
+    .form button {
         display: block;
         width: 100%;
         background-color: #181818;
@@ -85,13 +98,13 @@ a {
         outline: none;
     }
 
-    .popup-form button {
+    .form button {
         cursor: pointer;
     }
-        .popup-form button:hover {
+        .form button:hover {
             background-color: #1A1A1A;
         }
-        .popup-form button:active {
+        .form button:active {
             background-color: #151515;
         }
 
@@ -113,14 +126,16 @@ a {
 
     .bar h1 {
         font-size: 1em;
+        font-weight: 300;
     }
 
     .bar ul {
-        overflow: auto;
+        display: flex;
+        justify-content: space-between;
+        list-style-type: none;
     }
 
     .bar li {
-        display: inline-block;
         padding: 10px 20px;
     }
 
@@ -141,20 +156,24 @@ a {
     align-items: center;
 }
 
-#main {
+#main-area {
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-    #main p:first-of-type {
+    #main-area p:first-of-type {
         align-self: flex-start;
     }
-    #main p:last-of-type {
+    #main-area p:last-of-type {
         align-self: flex-end;
     }
 
 #current-stitch-count {
     font-size: 15em;
     text-align: center;
+}
+
+#total-stitch-count {
+    font-size: 1.1em;
 }

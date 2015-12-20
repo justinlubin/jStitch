@@ -1,26 +1,36 @@
 "use strict";
 (function() {
-    var fadeSpeed = 250;
+    var SPACE_BAR_KEY = 32;
+    var UP_ARROW_KEY = 38;
+    var DOWN_ARROW_KEY = 40;
+    var ESCAPE_KEY = 27;
 
-    function showRegisterForm() {
-        $("#login-form").fadeOut(fadeSpeed, function() {
-            $("#register-form").fadeToggle(fadeSpeed);
-        });
+    var errors = {
+        "0": "",
+        "-1": "An unknown error occurred.",
+        "1": "You are not logged in!",
+        "2": "You have entered invalid credentials.",
+        "3": "This username has already been taken.",
+        "4": "You must enter a username.",
+        "5": "You must enter a password."
     }
 
-    function showLoginForm() {
-        $("#register-form").fadeOut(function() {
-            $("#login-form").fadeToggle(fadeSpeed);
-        });
-    }
-
-    function hideForms() {
-        $(".popup-form").fadeOut(fadeSpeed);
+    function showError(errorCode) {
+        var message = "A truly unknown error occurred. (Error code: " + errorCode + ")";
+        if (errorCode in errors) {
+            message = errors[errorCode];
+        }
+        alert(message);
     }
 
     function clearStitchCount() {
         $.post("php/clear_stitch_count.php", function(errorCode) {
-            console.log(errorCode);
+            errorCode = parseInt(errorCode);
+            if (errorCode !== 0) {
+                showError(errorCode);
+            } else {
+                updateLocalStitchCounts();
+            }
         });
     }
 
@@ -28,60 +38,93 @@
         $.post("php/update_stitch_count.php", {
             "delta_stitch": deltaStitch
         }, function(errorCode) {
-            console.log(errorCode);
+            errorCode = parseInt(errorCode);
+            if (errorCode !== 0) {
+                showError(errorCode);
+            } else {
+                updateLocalStitchCounts();
+            }
         });
     }
 
-    function register() {
-        var username = $("#register-username").val();
-        var password = $("#register-password").val();
-        $.post("php/create_user.php", {
+    function updateLocalStitchCounts() {
+        $.post("php/get_stitch_counts.php", {
+            "dummyVariable": 0
+        }, function(response) {
+            var responseArray = JSON.parse(response);
+            console.log(responseArray);
+            var errorCode = responseArray[0];
+            if (errorCode !== 0) {
+                alert("imma here with EC:" + errorCode);
+                showError(errorCode);
+            } else {
+                var currentStitchCount = responseArray[1];
+                var totalStitchCount = responseArray[2];
+                $("#current-stitch-count").html(currentStitchCount);
+                $("#total-stitch-count").html(totalStitchCount);
+            }
+        });
+    }
+
+    function register(username, password) {
+        $.post("php/register_user.php", {
             "username": username,
             "password": password
         }, function(errorCode) {
-            console.log(errorCode);
+            errorCode = parseInt(errorCode);
+            if (errorCode !== 0) {
+                showError(errorCode);
+            } else {
+                logIn(username, password);
+            }
         });
     }
 
-    function login() {
-        var username = $("#login-username").val();
-        var password = $("#login-password").val();
+    function logIn(username, password) {
         $.post("php/log_in_user.php", {
             "username": username,
             "password": password
         }, function(errorCode) {
-            console.log(errorCode);
+            errorCode = parseInt(errorCode);
+            if (errorCode !== 0) {
+                showError(errorCode);
+            } else {
+                location.reload();
+            }
         });
     }
 
+    function logOut() {
+        $.post("php/log_out_user.php");
+        location.reload();
+    }
+
     $(document).ready(function() {
-        $(document).keydown(function(event) {
-            if (event.which == 32) {
-                event.preventDefault();
-                updateStitchCount(1);
-            } else if (event.which == 8) {
-                event.preventDefault();
-                updateStitchCount(-1);
-            } else if (event.which == 27) {
-                hideForms();
-            }
-        });
+        var loggedIn = $(document.body).data("logged-in");
+        if (loggedIn === 1) {
+            updateLocalStitchCounts();
+            $(document).keydown(function(event) {
+                if (event.which === UP_ARROW_KEY || event.which === SPACE_BAR_KEY) {
+                    updateStitchCount(1);
+                } else if (event.which === DOWN_ARROW_KEY) {
+                    updateStitchCount(-1);
+                }
+            });
+            $("#log-out").click(function() {
+                logOut();
+            })
+        } else {
+            $("#register-submit").click(function() {
+                var username = $("#register-username").val();
+                var password = $("#register-password").val();
+                register(username, password);
+            });
 
-        $("#register-link").click(function() {
-            event.stopPropagation();
-            showRegisterForm();
-        });
-        $("#login-link").click(function() {
-            event.stopPropagation();
-            showLoginForm();
-        });
-
-        $("#register-submit").click(function() {
-            register();
-        });
-
-        $("#login-submit").click(function() {
-            login();
-        });
+            $("#login-submit").click(function() {
+                var username = $("#login-username").val();
+                var password = $("#login-password").val();
+                logIn(username, password);
+            });
+        }
     });
 })();

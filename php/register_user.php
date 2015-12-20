@@ -1,6 +1,6 @@
 <?php
 
-// Returns a MySQL error code.
+// Returns an error code.
 
 require_once("api.php");
 
@@ -11,8 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $connection->real_escape_string($_POST["username"]);
     $password = $connection->real_escape_string($_POST["password"]);
 
-    add_user($connection, $username, $password);
-    echo $connection->errno;
+    echo register_user($connection, $username, $password);
 
     $connection->close();
 } else {
